@@ -1,0 +1,40 @@
+name: justdrink
+description: "water tracker"
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  provider:
+  hive: ^2.2.3
+  hive_flutter: ^1.0.0
+  hive_generator: ^2.0.1
+  flutter_svg: ^2.0.9
+  syncfusion_flutter_charts: ^23.2.7
+  flutter_screenutil: ^5.9.0
+  intl: ^0.18.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+
+flutter:
+  uses-material-design: true
+
+  assets:
+   - assets/images/
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+
