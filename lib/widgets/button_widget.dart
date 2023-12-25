@@ -38,11 +38,11 @@ class ButtonWidget extends StatelessWidget {
                   )
                 ],
                 gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                   colors: [
-                    Colors.white.withOpacity(0.5),
-                    Colors.grey.withOpacity(0.5),
+                    Colors.white.withOpacity(0.8),
+                    Colors.grey.withOpacity(0.8),
                   ],
                 ),
               ),
@@ -53,8 +53,8 @@ class ButtonWidget extends StatelessWidget {
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(50)),
                       gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                         colors: [
                           Colors.grey,
                           Colors.white,
