@@ -4,14 +4,16 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:justdrink/pages/water_page.dart';
 import 'package:justdrink/providers/water_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'models/buttons_model.dart';
 import 'models/water_daily_model.dart';
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(WaterDailyModelAdapter());
+  Hive.registerAdapter(ButtonsModelAdapter());
   await Hive.openBox<WaterDailyModel>('water_daily');
+  await Hive.openBox<ButtonsModel>('buttons');
   await Hive.openBox('water_settings');
   runApp(const MyApp());
 }
