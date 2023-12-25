@@ -42,9 +42,21 @@ class WaterPage extends StatelessWidget {
                     child: Column(
                       children: [
                         ElevatedButton(
-                            onPressed: () => Navigator.pushReplacement(context,
+                            onPressed: () {
+                              water.target = settings.get('target') ?? 0;
+                              water.weight = settings.get('weight') ?? '000';
+                              water.initialWakeUpTime = settings.get('wake') == null
+                                  ? const TimeOfDay(hour: 8, minute: 00)
+                                  : TimeOfDay(hour: int.parse(settings.get('wake').split(":")[0]),
+                                  minute: int.parse(settings.get('wake').split(":")[1]));
+                              water.initialBedTime = settings.get('bed') == null
+                                  ? const TimeOfDay(hour: 22, minute: 00)
+                                  : TimeOfDay(hour: int.parse(settings.get('bed').split(":")[0]),
+                                  minute: int.parse(settings.get('bed').split(":")[1]));
+                              Navigator.pushReplacement(context,
                                 MaterialPageRoute(builder: (context) =>
-                                const WaterSettingsPage())),
+                                const WaterSettingsPage()));
+                              },
                             child: Text('Add')),
                         Text('Weight ${settings.get('weight')}'),
                         Text('Targer ${settings.get('target')}'),

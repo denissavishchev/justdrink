@@ -27,6 +27,7 @@ class WaterProvider with ChangeNotifier {
         weight = weight.substring(0, 2) + index.toString();
         break;
     }
+    print(weight);
     target = int.parse(weight) * 30;
     notifyListeners();
   }
