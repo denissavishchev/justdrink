@@ -29,12 +29,12 @@ class ButtonWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: const BorderRadius.all(Radius.circular(50)),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                    color: kGrey,
+                    color: kGrey.withOpacity(0.8),
                     spreadRadius: 4,
                     blurRadius: 12,
-                    offset: Offset(4, 4)
+                    offset: const Offset(4, 4)
                   )
                 ],
                 gradient: LinearGradient(

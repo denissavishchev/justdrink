@@ -20,6 +20,7 @@ class WaterPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: kBlue,
         body: ValueListenableBuilder(
           valueListenable: Boxes.addButtonToBase().listenable(),
           builder: (context, buttonsBox, _){
@@ -91,33 +92,34 @@ class WaterPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Container(
-                                width: size.width * 0.3,
-                                height: size.height * 0.5,
-                                clipBehavior: Clip.hardEdge,
-                                decoration: const BoxDecoration(
-                                    color: kBlue,
-                                    borderRadius: BorderRadius.vertical(bottom: Radius.circular(130))
-                                ),
-                                child: ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: buttons.length,
-                                    itemBuilder: (context, index){
-                                      return Padding(
-                                        padding: const EdgeInsets.only(right: 4),
-                                        child: ButtonWidget(
-                                          onLongPress: () {
-                                            water.deleteMl(index, context, buttonsBox);
-                                          },
-                                          onTap: () => water.addPortionToBase(
-                                              buttons[index].buttons, box,
-                                              daily.isNotEmpty
-                                                  ? daily.last.dateMl.toString()
-                                                  : DateTime.now().day.toString()),
-                                          child: Text('${buttons[index].buttons}'),
-                                        ),
-                                      );
-                                    }
+                              Expanded(
+                                child: Container(
+                                  height: size.height * 0.5,
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: const BoxDecoration(
+                                      color: kBlue,
+                                      borderRadius: BorderRadius.all(Radius.circular(130))
+                                  ),
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: buttons.length,
+                                      itemBuilder: (context, index){
+                                        return Padding(
+                                          padding: const EdgeInsets.only(right: 4),
+                                          child: ButtonWidget(
+                                            onLongPress: () {
+                                              water.deleteMl(index, context, buttonsBox);
+                                            },
+                                            onTap: () => water.addPortionToBase(
+                                                buttons[index].buttons, box,
+                                                daily.isNotEmpty
+                                                    ? daily.last.dateMl.toString()
+                                                    : DateTime.now().day.toString()),
+                                            child: Text('${buttons[index].buttons}'),
+                                          ),
+                                        );
+                                      }
+                                  ),
                                 ),
                               ),
                             ],

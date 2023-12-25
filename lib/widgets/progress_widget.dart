@@ -19,15 +19,15 @@ class ProgressWidget extends StatelessWidget {
           return Container(
             width: 260,
             height: 260,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.horizontal(right: Radius.circular(130)),
+            decoration: BoxDecoration(
+              color: kBlue,
+              borderRadius: const BorderRadius.horizontal(right: Radius.circular(130)),
               boxShadow: [
                 BoxShadow(
-                    color: kGrey,
+                    color: kGrey.withOpacity(0.8),
                     spreadRadius: 4,
                     blurRadius: 12,
-                    offset: Offset(4, 4)
+                    offset: const Offset(4, 4)
                 )
               ],
             ),
@@ -40,9 +40,9 @@ class ProgressWidget extends StatelessWidget {
                   height: 235,
                   child: CircularProgressIndicator(
                     value: water.percent / 100,
-                    backgroundColor: Colors.deepOrange,
+                    backgroundColor: kGreen.withOpacity(0.3),
                     strokeWidth: 20,
-                    color: Colors.green,
+                    color: kGreen,
                     strokeCap: StrokeCap.round,
                   ),
                 ),
