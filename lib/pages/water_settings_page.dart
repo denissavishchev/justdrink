@@ -350,7 +350,7 @@ class WaterSettingsPage extends StatelessWidget {
                     ),
                     ElevatedButton(
                       child: Text('Save'),
-                      onPressed: () => water.saveSettings(),
+                      onPressed: () => water.saveSettings(context),
                     ),
                   ]
               )

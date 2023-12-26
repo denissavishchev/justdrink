@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:justdrink/pages/start_page.dart';
 import 'package:justdrink/pages/water_page.dart';
 import 'package:justdrink/providers/water_provider.dart';
 import 'package:provider/provider.dart';
@@ -28,14 +29,15 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<WaterProvider>(create: (_) => WaterProvider()),
         ],
         builder: (context, child) {
-      return ScreenUtilInit(
-        designSize: const Size(360, 780),
-        builder: (_, child) => const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: WaterPage(),
-        ),
-      );
-    }
+          Box settings = Hive.box('water_settings');
+            return ScreenUtilInit(
+              designSize: const Size(360, 780),
+              builder: (_, child) => MaterialApp(
+                debugShowCheckedModeBanner: false,
+                home: settings.isEmpty ? const StartPage() : const WaterPage(),
+              ),
+            );
+          }
     );
   }
 }

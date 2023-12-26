@@ -4,6 +4,7 @@ import 'package:justdrink/widgets/button_widget.dart';
 import '../models/boxes.dart';
 import '../models/buttons_model.dart';
 import '../models/water_daily_model.dart';
+import '../pages/water_page.dart';
 
 class WaterProvider with ChangeNotifier {
 
@@ -28,7 +29,6 @@ class WaterProvider with ChangeNotifier {
         weight = weight.substring(0, 2) + index.toString();
         break;
     }
-    print(weight);
     target = int.parse(weight) * 30;
     notifyListeners();
   }
@@ -169,12 +169,15 @@ class WaterProvider with ChangeNotifier {
     box.add(button);
   }
 
-  Future saveSettings() async{
+  Future saveSettings(context) async{
     await box.put('weight', weight);
     await box.put('target', target);
     await box.put('wake', initialWakeUpTime.toString().substring(10, 15));
     await box.put('bed', initialBedTime.toString().substring(10, 15));
     await box.put('interval', interval);
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) =>
+        const WaterPage()));
   }
 
   Future<void> wakeUpTimePicker(context) async {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
+import 'package:justdrink/pages/start_page.dart';
 import 'package:justdrink/pages/water_settings_page.dart';
 import 'package:justdrink/providers/water_provider.dart';
+import 'package:justdrink/widgets/basic_container_widget.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../models/boxes.dart';
@@ -56,24 +58,9 @@ class WaterPage extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     const SizedBox(height: 5,),
-                                    Container(
-                                      height: 100,
-                                      width: 260,
-                                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                                      decoration: BoxDecoration(
-                                          color: kBlue,
-                                          border: Border.all(width: 0.5, color: kOrange),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: kGrey.withOpacity(0.8),
-                                                spreadRadius: 2,
-                                                blurRadius: 4,
-                                                offset: const Offset(4, 4)
-                                            )
-                                          ],
-                                          borderRadius: const BorderRadius.horizontal(
-                                              right: Radius.circular(130))
-                                      ),
+                                    BasicContainerWidget(
+                                      height: size.height * 0.14,
+                                      width: size.width * 0.65,
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
@@ -99,6 +86,7 @@ class WaterPage extends StatelessWidget {
                                         ],
                                       ),
                                     ),
+                                    const SizedBox(height: 5),
                                     ProgressWidget(daily: daily),
                                   ],
                                 ),
@@ -179,6 +167,7 @@ class WaterPage extends StatelessWidget {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 50,),
                           SizedBox(
                             height: 80,
                             width: 250,
@@ -194,7 +183,12 @@ class WaterPage extends StatelessWidget {
                                     ],
                                   );
                                 }),
-                          )
+                          ),
+                          ButtonWidget(
+                              child: Text('Start'),
+                              onTap: () => Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (context) =>
+                                  const StartPage())))
                         ],
                       );
                     });
