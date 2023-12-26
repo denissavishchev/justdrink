@@ -91,12 +91,14 @@ class ProgressWidget extends StatelessWidget {
                     : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        const SizedBox(height: 5,),
                         Text('${daily.isEmpty || daily.last.dateMl != DateTime.now().day.toString()
                              ? 0 : daily.last.percentMl} %',
                           style: kOrangeStyle.copyWith(fontSize: 24),),
                         Text('${daily.isEmpty || daily.last.dateMl != DateTime.now().day.toString()
                             ? 0 : daily.last.portionMl} / ${water.target}',
                           style: kOrangeStyle.copyWith(fontSize: 20),),
+                        Text('ml', style: kOrangeStyle,)
                   ],
                 ),
               ],
