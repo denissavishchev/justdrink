@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:justdrink/constants.dart';
 
 class IconSvgWidget extends StatelessWidget {
   const IconSvgWidget({
     super.key,
     this.padding = 18,
     required this.icon,
-    this.color = const Color(0xff988e8d),
+    this.color = kOrange,
   });
 
   final double padding;
@@ -19,7 +20,7 @@ class IconSvgWidget extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       child: SvgPicture.asset('assets/icons/$icon.svg',
           colorFilter: ColorFilter.mode(
-              color.withOpacity(0.7),
+              color.withOpacity(0.8),
               BlendMode.srcIn)
       ),
     );

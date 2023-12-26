@@ -55,9 +55,25 @@ class WaterPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(height: 5,),
+                                    Container(
                                       height: 100,
                                       width: 260,
+                                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                                      decoration: BoxDecoration(
+                                          color: kBlue,
+                                          border: Border.all(width: 0.5, color: kOrange),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: kGrey.withOpacity(0.8),
+                                                spreadRadius: 2,
+                                                blurRadius: 4,
+                                                offset: const Offset(4, 4)
+                                            )
+                                          ],
+                                          borderRadius: const BorderRadius.horizontal(
+                                              right: Radius.circular(130))
+                                      ),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
@@ -78,6 +94,8 @@ class WaterPage extends StatelessWidget {
                                                     MaterialPageRoute(builder: (context) =>
                                                     const WaterSettingsPage()));
                                               }),
+                                          Text('Just \ndrink', style: kOrangeStyle.copyWith(fontSize: 36),),
+                                          const SizedBox.shrink(),
                                         ],
                                       ),
                                     ),
@@ -110,7 +128,8 @@ class WaterPage extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         ButtonWidget(
-                                            child: const Text('custom'),
+                                            child: Text('Custom',
+                                              style: kOrangeStyle,),
                                             onTap: () => water.createMl(
                                                 context, false, box,
                                                 daily.isNotEmpty
@@ -134,7 +153,14 @@ class WaterPage extends StatelessWidget {
                                                       daily.isNotEmpty
                                                           ? daily.last.dateMl.toString()
                                                           : DateTime.now().day.toString()),
-                                                  child: Text('${buttons[index].buttons}'),
+                                                  child: Stack(
+                                                    alignment: Alignment.center,
+                                                    children: [
+                                                      const IconSvgWidget(icon: 'drop', color: kBlue, padding: 10,),
+                                                      Text('${buttons[index].buttons}',
+                                                        style: kOrangeStyle.copyWith(fontSize: 16),),
+                                                    ],
+                                                  ),
                                                 ),
                                               );
                                             }

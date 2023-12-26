@@ -37,6 +37,44 @@ class ProgressWidget extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                      color: kBlue,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            color: kWhite,
+                            blurRadius: 20,
+                            offset: Offset(-10, -10)
+                        ),
+                        BoxShadow(
+                            color: kGrey,
+                            blurRadius: 20,
+                            offset: Offset(10, 10)
+                        ),
+                      ]
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 0.1, color: kOrange),
+                      boxShadow: const [
+                        BoxShadow(color: kBlue, blurRadius: 5),
+                        BoxShadow(color: kWhite, blurRadius: 20, spreadRadius: 5),
+                      ],
+                      borderRadius: const BorderRadius.all(Radius.circular(160)),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          kBlue,
+                          kWhite,
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: 235,
                   height: 235,
@@ -44,18 +82,21 @@ class ProgressWidget extends StatelessWidget {
                     value: water.percent / 100,
                     backgroundColor: kGreen.withOpacity(0.3),
                     strokeWidth: 20,
-                    color: kGreen,
+                    color: kGreen.withOpacity(0.8),
                     strokeCap: StrokeCap.round,
                   ),
                 ),
                 daily.isEmpty
                     ? const Text('Just drink')
                     : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('${daily.isEmpty || daily.last.dateMl != DateTime.now().day.toString()
-                             ? 0 : daily.last.percentMl} %'),
+                             ? 0 : daily.last.percentMl} %',
+                          style: kOrangeStyle.copyWith(fontSize: 24),),
                         Text('${daily.isEmpty || daily.last.dateMl != DateTime.now().day.toString()
-                            ? 0 : daily.last.portionMl} / ${water.target}'),
+                            ? 0 : daily.last.portionMl} / ${water.target}',
+                          style: kOrangeStyle.copyWith(fontSize: 20),),
                   ],
                 ),
               ],
