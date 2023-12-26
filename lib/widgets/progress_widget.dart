@@ -21,7 +21,9 @@ class ProgressWidget extends StatelessWidget {
             height: 260,
             decoration: BoxDecoration(
               color: kBlue,
-              borderRadius: const BorderRadius.horizontal(right: Radius.circular(130)),
+              borderRadius: const BorderRadius.horizontal(
+                  right: Radius.circular(130)),
+              border: Border.all(width: 0.5, color: kOrange),
               boxShadow: [
                 BoxShadow(
                     color: kGrey.withOpacity(0.8),
@@ -46,10 +48,14 @@ class ProgressWidget extends StatelessWidget {
                     strokeCap: StrokeCap.round,
                   ),
                 ),
-                Column(
-                  children: [
-                    Text('${daily.last.percentMl} %'),
-                    Text('${daily.last.portionMl} / ${water.target}'),
+                daily.isEmpty
+                    ? const Text('Just drink')
+                    : Column(
+                      children: [
+                        Text('${daily.isEmpty || daily.last.dateMl != DateTime.now().day.toString()
+                             ? 0 : daily.last.percentMl} %'),
+                        Text('${daily.isEmpty || daily.last.dateMl != DateTime.now().day.toString()
+                            ? 0 : daily.last.portionMl} / ${water.target}'),
                   ],
                 ),
               ],

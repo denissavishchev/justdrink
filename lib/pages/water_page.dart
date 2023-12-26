@@ -78,13 +78,6 @@ class WaterPage extends StatelessWidget {
                                                     MaterialPageRoute(builder: (context) =>
                                                     const WaterSettingsPage()));
                                               }),
-                                          ButtonWidget(
-                                            child: const IconSvgWidget(icon: 'add'),
-                                            onTap: () => water.createMl(
-                                                context, true, box,
-                                                daily.isNotEmpty
-                                                    ? daily.last.dateMl.toString()
-                                                    :DateTime.now().day.toString()), ),
                                         ],
                                       ),
                                     ),
@@ -94,43 +87,71 @@ class WaterPage extends StatelessWidget {
                               ),
                               Expanded(
                                 child: Container(
+                                  margin: const EdgeInsets.only(right: 12),
                                   height: size.height * 0.5,
                                   clipBehavior: Clip.hardEdge,
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                       color: kBlue,
-                                      borderRadius: BorderRadius.all(Radius.circular(130))
+                                      border: Border.all(width: 0.5, color: kOrange),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: kGrey.withOpacity(0.8),
+                                            spreadRadius: 4,
+                                            blurRadius: 12,
+                                            offset: const Offset(0, 8)
+                                        )
+                                      ],
+                                      borderRadius: const BorderRadius.vertical(
+                                          bottom: Radius.circular(130))
                                   ),
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: buttons.length,
-                                      itemBuilder: (context, index){
-                                        return Padding(
-                                          padding: const EdgeInsets.only(right: 4),
-                                          child: ButtonWidget(
-                                            onLongPress: () {
-                                              water.deleteMl(index, context, buttonsBox);
-                                            },
-                                            onTap: () => water.addPortionToBase(
-                                                buttons[index].buttons, box,
+                                  child: SingleChildScrollView(
+                                    physics: const ScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    child: Column(
+                                      children: [
+                                        ButtonWidget(
+                                            child: const Text('custom'),
+                                            onTap: () => water.createMl(
+                                                context, false, box,
                                                 daily.isNotEmpty
                                                     ? daily.last.dateMl.toString()
-                                                    : DateTime.now().day.toString()),
-                                            child: Text('${buttons[index].buttons}'),
-                                          ),
-                                        );
-                                      }
+                                                    :DateTime.now().day.toString())
+                                        ),
+                                        ListView.builder(
+                                            physics: const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount: buttons.length,
+                                            itemBuilder: (context, index){
+                                              return Padding(
+                                                padding: const EdgeInsets.only(right: 4),
+                                                child: ButtonWidget(
+                                                  onLongPress: () {
+                                                    water.deleteMl(index, context, buttonsBox);
+                                                  },
+                                                  onTap: () => water.addPortionToBase(
+                                                      buttons[index].buttons, box,
+                                                      daily.isNotEmpty
+                                                          ? daily.last.dateMl.toString()
+                                                          : DateTime.now().day.toString()),
+                                                  child: Text('${buttons[index].buttons}'),
+                                                ),
+                                              );
+                                            }
+                                        ),
+                                        ButtonWidget(
+                                          child: const IconSvgWidget(icon: 'add'),
+                                          onTap: () => water.createMl(
+                                              context, true, box,
+                                              daily.isNotEmpty
+                                                  ? daily.last.dateMl.toString()
+                                                  :DateTime.now().day.toString()),),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ],
-                          ),
-                          ButtonWidget(
-                              child: Text('custom'),
-                              onTap: () => water.createMl(
-                                  context, false, box,
-                                  daily.isNotEmpty
-                                      ? daily.last.dateMl.toString()
-                                      :DateTime.now().day.toString())
                           ),
                           SizedBox(
                             height: 80,
