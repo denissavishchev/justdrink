@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
-import 'package:justdrink/pages/start_page.dart';
-import 'package:justdrink/pages/water_settings_page.dart';
 import 'package:justdrink/providers/water_provider.dart';
 import 'package:justdrink/widgets/basic_container_widget.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +28,6 @@ class WaterPage extends StatelessWidget {
             return Consumer<WaterProvider>(
               builder: (context, water, _){
                 Box settings = Hive.box('water_settings');
-                water.target = settings.get('target') ?? 0;
                 return ValueListenableBuilder(
                     valueListenable: Boxes.addWaterDailyToBase().listenable(),
                     builder: (context, box, _){
@@ -57,7 +54,7 @@ class WaterPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    const SizedBox(height: 5,),
+                                    const SizedBox(height: 15,),
                                     BasicContainerWidget(
                                       height: size.height * 0.14,
                                       width: size.width * 0.65,
@@ -66,27 +63,15 @@ class WaterPage extends StatelessWidget {
                                         children: [
                                           ButtonWidget(
                                               child: const IconSvgWidget(icon: 'gear'),
-                                              onTap: (){
-                                                water.target = settings.get('target') ?? 0;
-                                                water.weight = settings.get('weight') ?? '000';
-                                                water.initialWakeUpTime = settings.get('wake') == null
-                                                    ? const TimeOfDay(hour: 8, minute: 00)
-                                                    : TimeOfDay(hour: int.parse(settings.get('wake').split(":")[0]),
-                                                    minute: int.parse(settings.get('wake').split(":")[1]));
-                                                water.initialBedTime = settings.get('bed') == null
-                                                    ? const TimeOfDay(hour: 22, minute: 00)
-                                                    : TimeOfDay(hour: int.parse(settings.get('bed').split(":")[0]),
-                                                    minute: int.parse(settings.get('bed').split(":")[1]));
-                                                Navigator.pushReplacement(context,
-                                                    MaterialPageRoute(builder: (context) =>
-                                                    const WaterSettingsPage()));
-                                              }),
-                                          Text('Just \ndrink', style: kOrangeStyle.copyWith(fontSize: 36),),
+                                              onTap: () => water.toSettingsPage(context, settings)),
+                                          Text('Just \ndrink',
+                                            style: kOrangeStyle.copyWith(fontSize: 36),
+                                            textAlign: TextAlign.center,),
                                           const SizedBox.shrink(),
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(height: 5),
+                                    const SizedBox(height: 10),
                                     ProgressWidget(daily: daily),
                                   ],
                                 ),
@@ -184,11 +169,6 @@ class WaterPage extends StatelessWidget {
                                   );
                                 }),
                           ),
-                          ButtonWidget(
-                              child: Text('Start'),
-                              onTap: () => Navigator.pushReplacement(context,
-                                  MaterialPageRoute(builder: (context) =>
-                                  const StartPage())))
                         ],
                       );
                     });

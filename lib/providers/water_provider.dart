@@ -4,6 +4,7 @@ import 'package:justdrink/widgets/button_widget.dart';
 import '../models/boxes.dart';
 import '../models/buttons_model.dart';
 import '../models/water_daily_model.dart';
+import '../pages/settings_page.dart';
 import '../pages/water_page.dart';
 
 class WaterProvider with ChangeNotifier {
@@ -16,6 +17,8 @@ class WaterProvider with ChangeNotifier {
   int interval = 1;
   double percent = 0;
   int water = 0;
+  bool kg = true;
+  bool dark = false;
 
   void setTarget(int index, int order){
     switch(order){
@@ -36,6 +39,34 @@ class WaterProvider with ChangeNotifier {
   void setInterval(int index){
     interval = index;
     notifyListeners();
+  }
+
+  void kgLbs(){
+    kg = !kg;
+    notifyListeners();
+  }
+
+  void darkMode(){
+    dark = !dark;
+    notifyListeners();
+  }
+
+  void toSettingsPage(context, Box settings){
+    target = settings.get('target') ?? 0;
+    weight = settings.get('weight') ?? '000';
+    initialWakeUpTime = settings.get('wake') == null
+        ? const TimeOfDay(hour: 8, minute: 00)
+        : TimeOfDay(hour: int.parse(settings.get('wake').split(":")[0]),
+        minute: int.parse(settings.get('wake').split(":")[1]));
+    initialBedTime = settings.get('bed') == null
+        ? const TimeOfDay(hour: 22, minute: 00)
+        : TimeOfDay(hour: int.parse(settings.get('bed').split(":")[0]),
+        minute: int.parse(settings.get('bed').split(":")[1]));
+    kg = settings.get('kg') ?? true;
+    dark = settings.get('dark') ?? false;
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) =>
+        const SettingsPage()));
   }
 
   Future addPortionToBase(int quantity, Box<WaterDailyModel> box, String date) async {
@@ -175,6 +206,8 @@ class WaterProvider with ChangeNotifier {
     await box.put('wake', initialWakeUpTime.toString().substring(10, 15));
     await box.put('bed', initialBedTime.toString().substring(10, 15));
     await box.put('interval', interval);
+    await box.put('kg', kg);
+    await box.put('dark', dark);
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) =>
         const WaterPage()));

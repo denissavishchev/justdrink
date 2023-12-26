@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:justdrink/pages/start_page.dart';
+import 'package:justdrink/pages/settings_page.dart';
 import 'package:justdrink/pages/water_page.dart';
 import 'package:justdrink/providers/water_provider.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
               designSize: const Size(360, 780),
               builder: (_, child) => MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: settings.isEmpty ? const StartPage() : const WaterPage(),
+                home: settings.isEmpty ? const SettingsPage() : const WaterPage(),
               ),
             );
           }
