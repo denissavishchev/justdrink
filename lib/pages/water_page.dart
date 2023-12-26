@@ -28,6 +28,7 @@ class WaterPage extends StatelessWidget {
             return Consumer<WaterProvider>(
               builder: (context, water, _){
                 Box settings = Hive.box('water_settings');
+                water.target = settings.get('target') ?? 0;
                 return ValueListenableBuilder(
                     valueListenable: Boxes.addWaterDailyToBase().listenable(),
                     builder: (context, box, _){
