@@ -156,7 +156,7 @@ class WaterPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 24,),
                           Container(
-                            height: size.height * 0.2,
+                            height: size.height * 0.3,
                             width: size.width,
                             decoration: BoxDecoration(
                               color: kBlue,
