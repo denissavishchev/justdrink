@@ -11,6 +11,7 @@ import '../models/water_daily_model.dart';
 import '../widgets/button_widget.dart';
 import '../widgets/icon_svg_widget.dart';
 import '../widgets/progress_widget.dart';
+import '../widgets/water_chart_widget.dart';
 
 class WaterPage extends StatelessWidget {
   const WaterPage({Key? key}) : super(key: key);
@@ -153,7 +154,24 @@ class WaterPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 50,),
+                          const SizedBox(height: 24,),
+                          Container(
+                            height: size.height * 0.2,
+                            width: size.width,
+                            decoration: BoxDecoration(
+                              color: kBlue,
+                              border: Border.all(width: 0.5, color: kOrange),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: kGrey.withOpacity(0.8),
+                                  spreadRadius: 4,
+                                  blurRadius: 8,
+                                )
+                              ],
+                            ),
+                            child: WaterChartWidget(daily: daily,),
+                          ),
+                          const SizedBox(height: 20,),
                           SizedBox(
                             height: 80,
                             width: 250,
