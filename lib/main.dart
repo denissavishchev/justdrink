@@ -5,6 +5,7 @@ import 'package:justdrink/pages/settings_page.dart';
 import 'package:justdrink/pages/water_page.dart';
 import 'package:justdrink/providers/water_provider.dart';
 import 'package:provider/provider.dart';
+import 'constants.dart';
 import 'models/buttons_model.dart';
 import 'models/water_daily_model.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
             return ScreenUtilInit(
               designSize: const Size(360, 780),
               builder: (_, child) => MaterialApp(
+                theme: pickerTheme,
                 debugShowCheckedModeBanner: false,
                 home: settings.isEmpty ? const SettingsPage() : const WaterPage(),
               ),
