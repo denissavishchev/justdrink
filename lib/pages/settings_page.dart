@@ -261,7 +261,10 @@ class SettingsPage extends StatelessWidget {
                               const Spacer(),
                               ButtonWidget(
                                   child: const IconSvgWidget(icon: 'drop',),
-                                  onTap: () => water.saveSettings(context)),
+                                  onTap: () {
+                                    water.saveSettings(context);
+                                    water.addNotification();
+                                    }),
                               const Spacer(),
                             ],
                           ),

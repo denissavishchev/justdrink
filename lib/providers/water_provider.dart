@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:justdrink/widgets/button_widget.dart';
@@ -239,6 +240,38 @@ class WaterProvider with ChangeNotifier {
       },
     )) ?? const TimeOfDay(hour: 22, minute: 00);
     notifyListeners();
+  }
+
+  Future<void> addNotification() async {
+    AwesomeNotifications().removeChannel('scheduled');
+    AwesomeNotifications().setChannel(NotificationChannel(
+        channelKey: 'scheduled',
+        channelName: 'Scheduled Notifications',
+        channelDescription: 'Notification channel for basic tests'));
+    Box box = Hive.box('notifications');
+    await box.put('start', initialWakeUpTime.toString());
+    await box.put('end', initialBedTime.toString());
+    await box.put('interval', interval);
+    notifyListeners();
+    int startTime = int.parse(box.get('start').toString().substring(10, 12));
+    int endTime = int.parse(box.get('end').toString().substring(10, 12)) == 0
+        ? 24 : int.parse(box.get('end').toString().substring(10, 12));
+    int intervalTime = await box.get('interval');
+    for(var i = 0; i < endTime - startTime + 1; i+=intervalTime){
+      await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: DateTime.now().microsecondsSinceEpoch.remainder(200),
+          channelKey: 'scheduled',
+          title: '${Emojis.wheater_droplet} Just drink some water ${Emojis.wheater_droplet}',
+        ),
+        schedule: NotificationCalendar(
+            hour: int.parse(box.get('start').toString().substring(10, 12)) + i,
+            minute: int.parse(box.get('start').toString().substring(13, 15)),
+            second: 0,
+            repeats: true
+        ),
+      );
+    }
   }
 
 }

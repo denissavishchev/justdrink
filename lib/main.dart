@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -17,6 +18,25 @@ Future main() async{
   await Hive.openBox<WaterDailyModel>('water_daily');
   await Hive.openBox<ButtonsModel>('buttons');
   await Hive.openBox('water_settings');
+  await Hive.openBox('notifications');
+  AwesomeNotifications().initialize(
+      null,
+      [
+        NotificationChannel(
+          channelKey: 'scheduled',
+          channelGroupKey: 'basic_channel_group',
+          channelName: 'Scheduled Notifications',
+          importance: NotificationImportance.High,
+          channelShowBadge: true,
+          channelDescription: 'Notification channel for basic tests')
+      ],
+      channelGroups: [
+        NotificationChannelGroup(
+            channelGroupKey: 'basic_channel_group',
+            channelGroupName: 'Basic group')
+      ],
+      debug: false
+  );
   runApp(const MyApp());
 }
 
