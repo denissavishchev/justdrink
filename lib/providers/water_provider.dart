@@ -249,6 +249,9 @@ class WaterProvider with ChangeNotifier {
     if(waterDaily.isNotEmpty){
       totalPercents.clear();
       for(var p in waterDaily){
+        if(p.percentMl > 100){
+          p.percentMl = 100;
+        }
         totalPercents.add(p.percentMl);
       }
       var sum = totalPercents.reduce((a, b) => a + b);
