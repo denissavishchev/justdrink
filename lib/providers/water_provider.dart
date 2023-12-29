@@ -247,6 +247,7 @@ class WaterProvider with ChangeNotifier {
 
   String totalHydration(){
     if(waterDaily.isNotEmpty){
+      totalPercents.clear();
       for(var p in waterDaily){
         totalPercents.add(p.percentMl);
       }
@@ -255,6 +256,7 @@ class WaterProvider with ChangeNotifier {
     }else{
       return '0';
     }
+
   }
 
   String description(){
