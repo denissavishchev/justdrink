@@ -200,7 +200,8 @@ class SettingsPage extends StatelessWidget {
                               width: size.width * 0.5,
                               child: Row(
                                 children: [
-                                  Text('Interval (h): ', style: kOrangeStyle.copyWith(fontSize: 18.sp),),
+                                  Text('Interval (h): ',
+                                    style: kOrangeStyle.copyWith(fontSize: 18.sp),),
                                   SizedBox(
                                       width: 58,
                                       height: 98,

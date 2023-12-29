@@ -9,6 +9,8 @@ import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'models/buttons_model.dart';
 import 'models/water_daily_model.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,11 @@ Future main() async{
   await Hive.openBox<ButtonsModel>('buttons');
   await Hive.openBox('water_settings');
   await Hive.openBox('notifications');
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
   AwesomeNotifications().initialize(
       null,
       [

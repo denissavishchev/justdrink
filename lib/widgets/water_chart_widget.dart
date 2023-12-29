@@ -59,7 +59,7 @@ class _WaterChartWidgetState extends State<WaterChartWidget> {
               xValueMapper: (WaterDailyModel data, _) => DateTime.parse(data.dateTime),
               yValueMapper: (WaterDailyModel data, _) => data.percentMl > 100
                   ? 100 : data.percentMl,
-              width: 0.3,
+              width: 0.45,
               borderRadius: const BorderRadius.all(Radius.circular(15)),
               dataLabelSettings: const DataLabelSettings(
                 isVisible: true,

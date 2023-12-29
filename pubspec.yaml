@@ -19,7 +19,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   intl: ^0.18.1
   awesome_notifications: ^0.8.2
-
+  permission_handler: ^11.1.0
 
 dev_dependencies:
   flutter_test:

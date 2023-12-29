@@ -20,6 +20,9 @@ class WaterProvider with ChangeNotifier {
   int water = 0;
   bool kg = true;
   bool dark = false;
+  String hydration = '0';
+  List<WaterDailyModel> waterDaily = [];
+  List<int> totalPercents = [];
 
   void setTarget(int index, int order){
     switch(order){
@@ -240,6 +243,30 @@ class WaterProvider with ChangeNotifier {
       },
     )) ?? const TimeOfDay(hour: 22, minute: 00);
     notifyListeners();
+  }
+
+  String totalHydration(){
+    if(waterDaily.isNotEmpty){
+      for(var p in waterDaily){
+        totalPercents.add(p.percentMl);
+      }
+      var sum = totalPercents.reduce((a, b) => a + b);
+      return hydration =  (sum / totalPercents.length).toStringAsFixed(0);
+    }else{
+      return '0';
+    }
+  }
+
+  String description(){
+    if(int.parse(hydration) >= 90){
+      return 'Excellent result';
+    }else if(int.parse(hydration) >= 75 && int.parse(hydration) < 90){
+      return 'Way to go';
+    }else if(int.parse(hydration) >= 50 && int.parse(hydration) < 75){
+      return 'Not bad';
+    }else{
+      return 'Drink more water';
+    }
   }
 
   Future<void> addNotification() async {

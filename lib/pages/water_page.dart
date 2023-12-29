@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:intl/intl.dart';
 import 'package:justdrink/providers/water_provider.dart';
 import 'package:justdrink/widgets/basic_container_widget.dart';
+import 'package:justdrink/widgets/one_scroll_widget.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../models/boxes.dart';
@@ -34,6 +34,7 @@ class WaterPage extends StatelessWidget {
                     valueListenable: Boxes.addWaterDailyToBase().listenable(),
                     builder: (context, box, _){
                       final daily = box.values.toList().cast<WaterDailyModel>();
+                      water.waterDaily = daily;
                       if(daily.isNotEmpty && daily.last.dateMl != DateTime.now().day.toString()){
                         water.water = 0;
                         water.percent = 0;
@@ -169,24 +170,36 @@ class WaterPage extends StatelessWidget {
                                 )
                               ],
                             ),
-                            child: WaterChartWidget(daily: daily,),
+                            child: daily.isEmpty
+                                  ? Align(
+                                    alignment: Alignment.center,
+                                    child: Text('Boost your energy, revitalize your body, '
+                                        '\nand enhance your well-being with a simple change: '
+                                        '\ndrink more water. Stay hydrated and feel the difference!',
+                                    style: kOrangeStyle.copyWith(fontSize: 16),
+                                    textAlign: TextAlign.center,),
+                                    )
+                                  : WaterChartWidget(daily: daily,),
                           ),
                           const SizedBox(height: 20,),
-                          SizedBox(
-                            height: 80,
-                            width: 250,
-                            child: ListView.builder(
-                                itemCount: daily.length,
-                                itemBuilder: (context, index){
-                                  return Row(
+                          Row(
+                            children: [
+                              BasicContainerWidget(
+                                  height: size.height * 0.075,
+                                  width: size.width * 0.8,
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('Date ${DateFormat('yyyy-MM-dd').format(DateTime.parse(daily[index].dateTime))}'),
-                                      Text('Portion ${daily[index].portionMl}'),
-                                      Text('${daily[index].percentMl}%'),
+                                      const Spacer(),
+                                      Text(water.description(), 
+                                          style: kOrangeStyle.copyWith(fontSize: 22)),
+                                      const Spacer(),
+                                      OneScrollWidget(index: int.parse(water.totalHydration())),
                                     ],
-                                  );
-                                }),
+                                  )
+                              ),
+                              const Spacer(),
+                            ],
                           ),
                         ],
                       );
