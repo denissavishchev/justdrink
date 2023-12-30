@@ -61,7 +61,7 @@ class SettingsPage extends StatelessWidget {
                           children: [
                             BasicContainerWidget(
                               height: size.height * 0.11,
-                              width: size.width * 0.72,
+                              width: size.width * 0.74,
                               child: Row(
                                 children: [
                                   Text('Weight: ', style: kOrangeStyle.copyWith(fontSize: 18.sp),),
@@ -134,15 +134,19 @@ class SettingsPage extends StatelessWidget {
                                       ),
                                     ],
                                   ),
+                                  Text(' kg', style: kOrangeStyle.copyWith(fontSize: 18.sp),),
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 12.0),
-                              child: ButtonWidget(
-                                  child: Text(water.kg ? 'kg' : 'lbs',
-                                    style: kOrangeStyle.copyWith(fontSize: 18.sp),),
-                                  onTap: () => water.kgLbs()),
+                            Visibility(
+                              visible: false,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 12.0),
+                                child: ButtonWidget(
+                                    child: Text(water.kg ? 'kg' : 'lbs',
+                                      style: kOrangeStyle.copyWith(fontSize: 18.sp),),
+                                    onTap: () => water.kgLbs()),
+                              ),
                             ),
                           ],
                         ),

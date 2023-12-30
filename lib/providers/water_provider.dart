@@ -2,11 +2,13 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:justdrink/widgets/button_widget.dart';
+import '../constants.dart';
 import '../models/boxes.dart';
 import '../models/buttons_model.dart';
 import '../models/water_daily_model.dart';
 import '../pages/settings_page.dart';
 import '../pages/water_page.dart';
+import '../widgets/icon_svg_widget.dart';
 
 class WaterProvider with ChangeNotifier {
 
@@ -105,49 +107,72 @@ class WaterProvider with ChangeNotifier {
   }
 
   Future createMl(context, bool button, Box<WaterDailyModel> box, String date) {
-    return showModalBottomSheet(
+    return showModalBottomSheet( 
         context: context,
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         builder: (context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.45,
-            margin: const EdgeInsets.fromLTRB(84, 12, 84, 150),
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.5),
-                borderRadius: const BorderRadius.all(Radius.circular(24)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      // spreadRadius: 2,
-                      blurRadius: 3,
-                      offset: const Offset(1, 1)
+          return Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.1,
+                right: 14),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                clipBehavior: Clip.hardEdge,
+                height: MediaQuery.of(context).size.height * 0.8,
+                width: 100,
+                margin: const EdgeInsets.fromLTRB(0, 12, 0, 150),
+                decoration: BoxDecoration(
+                    color: kBlue.withOpacity(0.8),
+                    border: Border.all(width: 0.5, color: kOrange),
+                    boxShadow: [
+                      BoxShadow(
+                        color: kGrey.withOpacity(0.8),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                      )
+                    ],
+                    borderRadius: const BorderRadius.all(Radius.circular(130))
+                ),
+                child: SingleChildScrollView(
+                  physics: const ScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: [
+                      ButtonWidget(
+                          child: const IconSvgWidget(icon: 'cancel'),
+                          onTap: () => Navigator.of(context).pop()
+                      ),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: 10,
+                        itemBuilder: (context, index){
+                          return ButtonWidget(
+                            onTap: () {
+                              if(button){
+                                addButton((index + 1) * 100);
+                              }else{
+                                addPortionToBase((index + 1) * 100, box, date);
+                              }
+                              Navigator.of(context).pop();
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                const IconSvgWidget(icon: 'drop', color: kBlue, padding: 10,),
+                                Text('${(index + 1) * 100}',
+                                  style: kOrangeStyle.copyWith(fontSize: 16),),
+                              ],
+                            ),);
+                        },
+                      ),
+                    ],
                   ),
-                ]
-            ),
-            child: ListWheelScrollView(
-              onSelectedItemChanged: (index) {
-                FocusManager.instance.primaryFocus?.unfocus();
-                // data.setDays(index, true);
-              },
-              physics: const FixedExtentScrollPhysics(),
-              itemExtent: 74,
-              children: List.generate(10, (index){
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
-                  child: ButtonWidget(
-                      onTap: () {
-                        if(button){
-                          addButton((index + 1) * 100);
-                        }else{
-                          addPortionToBase((index + 1) * 100, box, date);
-                        }
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('${(index + 1) * 100}'),),
-                );
-              } ),
+                ),
+              ),
             ),
           );
         });
@@ -159,40 +184,46 @@ class WaterProvider with ChangeNotifier {
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         builder: (context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.45,
-            margin: const EdgeInsets.fromLTRB(84, 12, 84, 150),
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5),
-              borderRadius: const BorderRadius.all(Radius.circular(24)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    // spreadRadius: 2,
-                    blurRadius: 3,
-                    offset: const Offset(1, 1)
+          return Row(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: MediaQuery.of(context).size.height * 0.11,
+                margin: const EdgeInsets.fromLTRB(0, 12, 0, 34),
+                decoration: BoxDecoration(
+                    color: kBlue.withOpacity(0.8),
+                    border: Border.all(width: 0.5, color: kOrange),
+                    boxShadow: [
+                      BoxShadow(
+                        color: kGrey.withOpacity(0.8),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                      )
+                    ],
+                    borderRadius: const BorderRadius.horizontal(
+                        right: Radius.circular(130))
                 ),
-              ]
-            ),
-            child: Column(
-              children: [
-                const SizedBox(height: 20,),
-                Row(
+                child: Row(
                   children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          box.deleteAt(index);
-                          Navigator.of(context).pop();
-                        },
-                        child: Text('Ok')),
-                    ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text('Cancel')),
+                    const Spacer(),
+                    Text('Delete button?',
+                        style: kOrangeStyle.copyWith(fontSize: 22)),
+                    const Spacer(),
+                    ButtonWidget(
+                      child: const IconSvgWidget(icon: 'check',),
+                      onTap: () {
+                        box.deleteAt(index);
+                        Navigator.of(context).pop();
+                      },),
+                    ButtonWidget(
+                        child: const IconSvgWidget(icon: 'cancel',),
+                        onTap: () => Navigator.of(context).pop()),
+                    const Spacer(),
                   ],
                 ),
-              ],
-            ),
+              ),
+              const Spacer(),
+            ],
           );
         });
   }
