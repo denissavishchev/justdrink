@@ -228,21 +228,24 @@ class SettingsPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            BasicContainerWidget(
-                              right: false,
-                              height: size.height * 0.11,
-                              width: size.width * 0.32,
-                              child: Row(
-                                children: [
-                                  ButtonWidget(
-                                    onTap: () => water.darkMode(),
-                                    child: IconSvgWidget(
-                                      icon: 'bulb',
-                                      color: water.dark ? Colors.black : kOrange,
-                                    )),
-                                  const Spacer()
-                                ],
-                              )
+                            Visibility(
+                              visible: false,
+                              child: BasicContainerWidget(
+                                right: false,
+                                height: size.height * 0.11,
+                                width: size.width * 0.32,
+                                child: Row(
+                                  children: [
+                                    ButtonWidget(
+                                      onTap: () => water.darkMode(),
+                                      child: IconSvgWidget(
+                                        icon: 'bulb',
+                                        color: water.dark ? Colors.black : kOrange,
+                                      )),
+                                    const Spacer()
+                                  ],
+                                )
+                              ),
                             )
                           ],
                         ),
