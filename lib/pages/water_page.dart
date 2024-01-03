@@ -179,7 +179,7 @@ class WaterPage extends StatelessWidget {
                                     style: kOrangeStyle.copyWith(fontSize: 16),
                                     textAlign: TextAlign.center,),
                                     )
-                                  : WaterChartWidget(daily: daily,),
+                                  : WaterChartWidget(daily: daily.reversed.toList(),),
                           ),
                           const SizedBox(height: 20,),
                           Row(

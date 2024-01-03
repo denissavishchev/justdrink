@@ -104,6 +104,7 @@ class WaterProvider with ChangeNotifier {
       final box = Boxes.addWaterDailyToBase();
       box.add(waterDaily);
     }
+    notifyListeners();
   }
 
   Future createMl(context, bool button, Box<WaterDailyModel> box, String date) {
