@@ -20,7 +20,7 @@ class IconSvgWidget extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       child: SvgPicture.asset('assets/icons/$icon.svg',
           colorFilter: ColorFilter.mode(
-              color.withOpacity(0.8),
+              color.withValues(alpha: 0.8),
               BlendMode.srcIn)
       ),
     );

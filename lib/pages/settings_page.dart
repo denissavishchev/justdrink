@@ -10,7 +10,7 @@ import '../widgets/icon_svg_widget.dart';
 import '../widgets/one_scroll_widget.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class SettingsPage extends StatelessWidget {
                             border: Border.all(width: 0.5, color: kOrange),
                             boxShadow: [
                               BoxShadow(
-                                color: kGrey.withOpacity(0.8),
+                                color: kGrey.withValues(alpha: 0.8),
                                 spreadRadius: 4,
                                 blurRadius: 8,
                               )
@@ -258,7 +258,7 @@ class SettingsPage extends StatelessWidget {
                             border: Border.all(width: 0.5, color: kOrange),
                             boxShadow: [
                               BoxShadow(
-                                color: kGrey.withOpacity(0.8),
+                                color: kGrey.withValues(alpha: 0.8),
                                 spreadRadius: 4,
                                 blurRadius: 8,
                               )

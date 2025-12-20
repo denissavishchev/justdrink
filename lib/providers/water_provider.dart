@@ -57,7 +57,7 @@ class WaterProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toSettingsPage(context, Box settings){
+  void toSettingsPage(BuildContext context, Box settings){
     target = settings.get('target') ?? 0;
     weight = settings.get('weight') ?? '000';
     initialWakeUpTime = settings.get('wake') == null
@@ -107,7 +107,7 @@ class WaterProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future createMl(context, bool button, Box<WaterDailyModel> box, String date) {
+  Future createMl(BuildContext context, bool button, Box<WaterDailyModel> box, String date) {
     return showModalBottomSheet( 
         context: context,
         isScrollControlled: true,
@@ -125,11 +125,11 @@ class WaterProvider with ChangeNotifier {
                 width: 100,
                 margin: const EdgeInsets.fromLTRB(0, 12, 0, 150),
                 decoration: BoxDecoration(
-                    color: kBlue.withOpacity(0.8),
+                    color: kBlue.withValues(alpha: 0.8),
                     border: Border.all(width: 0.5, color: kOrange),
                     boxShadow: [
                       BoxShadow(
-                        color: kGrey.withOpacity(0.8),
+                        color: kGrey.withValues(alpha: 0.8),
                         spreadRadius: 1,
                         blurRadius: 1,
                       )
@@ -192,11 +192,11 @@ class WaterProvider with ChangeNotifier {
                 height: MediaQuery.of(context).size.height * 0.11,
                 margin: const EdgeInsets.fromLTRB(0, 12, 0, 34),
                 decoration: BoxDecoration(
-                    color: kBlue.withOpacity(0.8),
+                    color: kBlue.withValues(alpha: 0.8),
                     border: Border.all(width: 0.5, color: kOrange),
                     boxShadow: [
                       BoxShadow(
-                        color: kGrey.withOpacity(0.8),
+                        color: kGrey.withValues(alpha: 0.8),
                         spreadRadius: 1,
                         blurRadius: 1,
                       )
@@ -236,7 +236,7 @@ class WaterProvider with ChangeNotifier {
     box.add(button);
   }
 
-  Future saveSettings(context) async{
+  Future saveSettings(BuildContext context) async{
     await box.put('weight', weight);
     await box.put('target', target);
     await box.put('wake', initialWakeUpTime.toString().substring(10, 15));
@@ -244,12 +244,13 @@ class WaterProvider with ChangeNotifier {
     await box.put('interval', interval);
     await box.put('kg', kg);
     await box.put('dark', dark);
+    if (!context.mounted) return;
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) =>
         const WaterPage()));
   }
 
-  Future<void> wakeUpTimePicker(context) async {
+  Future<void> wakeUpTimePicker(BuildContext context) async {
     initialWakeUpTime = (await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
@@ -263,7 +264,7 @@ class WaterProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> bedTimePicker(context) async {
+  Future<void> bedTimePicker(BuildContext context) async {
     initialBedTime = (await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),

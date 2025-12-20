@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:justdrink/constants.dart';
 
 class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({Key? key,
+  const ButtonWidget({super.key,
     required this.child,
     required this.onTap,
     this.onLongPress,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final VoidCallback onTap;
@@ -31,7 +31,7 @@ class ButtonWidget extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(50)),
                 boxShadow: [
                   BoxShadow(
-                    color: kGrey.withOpacity(0.8),
+                    color: kGrey.withValues(alpha: 0.8),
                     spreadRadius: 4,
                     blurRadius: 12,
                     offset: const Offset(4, 4)
@@ -41,8 +41,8 @@ class ButtonWidget extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Colors.white.withOpacity(0.8),
-                    Colors.grey.withOpacity(0.8),
+                    Colors.white.withValues(alpha: 0.8),
+                    Colors.grey.withValues(alpha: 0.8),
                   ],
                 ),
               ),

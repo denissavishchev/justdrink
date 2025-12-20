@@ -26,7 +26,7 @@ class ProgressWidget extends StatelessWidget {
               border: Border.all(width: 0.5, color: kOrange),
               boxShadow: [
                 BoxShadow(
-                    color: kGrey.withOpacity(0.8),
+                    color: kGrey.withValues(alpha: 0.8),
                     spreadRadius: 4,
                     blurRadius: 12,
                     offset: const Offset(4, 4)
@@ -80,9 +80,9 @@ class ProgressWidget extends StatelessWidget {
                   height: 235,
                   child: CircularProgressIndicator(
                     value: water.percent / 100,
-                    backgroundColor: kGreen.withOpacity(0.3),
+                    backgroundColor: kGreen.withValues(alpha: 0.3),
                     strokeWidth: 20,
-                    color: kGreen.withOpacity(0.8),
+                    color: kGreen.withValues(alpha: 0.8),
                     strokeCap: StrokeCap.round,
                   ),
                 ),

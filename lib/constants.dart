@@ -16,15 +16,15 @@ final kOrangeStyle = TextStyle(
 final pickerTheme = ThemeData(
   timePickerTheme: TimePickerThemeData(
     dialBackgroundColor: kBlue,
-    backgroundColor: kBlue.withOpacity(0.8),
-    dialHandColor: kOrange.withOpacity(0.6),
+    backgroundColor: kBlue.withValues(alpha: 0.8),
+    dialHandColor: kOrange.withValues(alpha: 0.6),
     elevation: 10,
-    dialTextColor: MaterialStateColor.resolveWith(
-            (states) => states.contains(MaterialState.selected) ? kWhite : kWhite),
-    hourMinuteColor: MaterialStateColor.resolveWith((states) =>
-    states.contains(MaterialState.selected) ? kBlue : kBlue.withOpacity(0.5)),
-    hourMinuteTextColor: MaterialStateColor.resolveWith(
-            (states) => states.contains(MaterialState.selected) ? kWhite : kWhite.withOpacity(0.8)),
+    dialTextColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected) ? kWhite : kWhite),
+    hourMinuteColor: WidgetStateColor.resolveWith((states) =>
+    states.contains(WidgetState.selected) ? kBlue : kBlue.withValues(alpha: 0.5)),
+    hourMinuteTextColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected) ? kWhite : kWhite.withValues(alpha: 0.8)),
     hourMinuteShape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(24)),
     ),
@@ -36,8 +36,8 @@ final pickerTheme = ThemeData(
   ),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateColor.resolveWith((states) => kOrange),
-      backgroundColor: MaterialStateColor.resolveWith((states) => kBlue),
+      foregroundColor: WidgetStateColor.resolveWith((states) => kOrange),
+      backgroundColor: WidgetStateColor.resolveWith((states) => kBlue),
     ),
   ),
 );

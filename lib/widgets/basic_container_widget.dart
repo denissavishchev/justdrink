@@ -27,7 +27,7 @@ class BasicContainerWidget extends StatelessWidget {
           border: Border.all(width: 0.5, color: kOrange),
           boxShadow: [
             BoxShadow(
-                color: kGrey.withOpacity(0.8),
+                color: kGrey.withValues(alpha: 0.8),
                 spreadRadius: 2,
                 blurRadius: 4,
                 offset: Offset(right ? 4 : -4, 4)

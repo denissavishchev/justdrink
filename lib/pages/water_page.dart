@@ -14,7 +14,7 @@ import '../widgets/progress_widget.dart';
 import '../widgets/water_chart_widget.dart';
 
 class WaterPage extends StatelessWidget {
-  const WaterPage({Key? key}) : super(key: key);
+  const WaterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class WaterPage extends StatelessWidget {
                                       border: Border.all(width: 0.5, color: kOrange),
                                       boxShadow: [
                                         BoxShadow(
-                                            color: kGrey.withOpacity(0.8),
+                                            color: kGrey.withValues(alpha: 0.8),
                                             spreadRadius: 4,
                                             blurRadius: 12,
                                             offset: const Offset(0, 8)
@@ -164,7 +164,7 @@ class WaterPage extends StatelessWidget {
                               border: Border.all(width: 0.5, color: kOrange),
                               boxShadow: [
                                 BoxShadow(
-                                  color: kGrey.withOpacity(0.8),
+                                  color: kGrey.withValues(alpha: 0.8),
                                   spreadRadius: 4,
                                   blurRadius: 8,
                                 )
