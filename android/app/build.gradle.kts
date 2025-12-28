@@ -36,7 +36,7 @@ android {
         applicationId = "com.devis.justdrink"
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 5
+        versionCode = 6
         versionName = flutter.versionName
     }
 
