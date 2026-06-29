@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:justdrink/providers/water_provider.dart';
@@ -104,7 +105,7 @@ class WaterPage extends StatelessWidget {
                                     child: Column(
                                       children: [
                                         ButtonWidget(
-                                            child: Text('Custom',
+                                            child: Text('custom'.tr(),
                                               style: kOrangeStyle,),
                                             onTap: () => water.createMl(
                                                 context, false, box,
@@ -157,7 +158,7 @@ class WaterPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 24,),
                           Container(
-                            height: size.height * 0.3,
+                            height: size.height * 0.24,
                             width: size.width,
                             decoration: BoxDecoration(
                               color: kBlue,
@@ -173,9 +174,7 @@ class WaterPage extends StatelessWidget {
                             child: daily.isEmpty
                                   ? Align(
                                     alignment: Alignment.center,
-                                    child: Text('Boost your energy, revitalize your body, '
-                                        '\nand enhance your well-being with a simple change: '
-                                        '\ndrink more water. Stay hydrated and feel the difference!',
+                                    child: Text('boostYourEnergy'.tr(),
                                     style: kOrangeStyle.copyWith(fontSize: 16),
                                     textAlign: TextAlign.center,),
                                     )

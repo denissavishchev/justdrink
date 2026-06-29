@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -14,6 +15,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(WaterDailyModelAdapter());
   Hive.registerAdapter(ButtonsModelAdapter());
@@ -52,21 +54,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<WaterProvider>(create: (_) => WaterProvider()),
-        ],
-        builder: (context, child) {
-          Box settings = Hive.box('water_settings');
-            return ScreenUtilInit(
-              designSize: const Size(360, 780),
-              builder: (_, child) => MaterialApp(
-                theme: pickerTheme,
-                debugShowCheckedModeBanner: false,
-                home: settings.isEmpty ? const SettingsPage() : const WaterPage(),
-              ),
-            );
-          }
+    return EasyLocalization(
+      supportedLocales: const [
+        Locale('en', 'US'),
+        Locale('pl', 'PL'),
+        Locale('ru', 'RU'),
+      ],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en', 'US'),
+      startLocale: const Locale('en', 'US'),
+      saveLocale: false,
+      child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider<WaterProvider>(create: (_) => WaterProvider()),
+          ],
+          builder: (context, child) {
+            Box settings = Hive.box('water_settings');
+              return ScreenUtilInit(
+                designSize: const Size(360, 780),
+                builder: (_, child) => MaterialApp(
+                  theme: pickerTheme,
+                  debugShowCheckedModeBanner: false,
+                  localizationsDelegates: context.localizationDelegates,
+                  supportedLocales: context.supportedLocales,
+                  locale: context.locale,
+                  home: settings.isEmpty ? const SettingsPage() : const WaterPage(),
+                ),
+              );
+            }
+      ),
     );
   }
 }

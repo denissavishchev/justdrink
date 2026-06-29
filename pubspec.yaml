@@ -1,7 +1,7 @@
 name: justdrink
 description: "water tracker"
 
-version: 1.0.4
+version: 1.0.5
 
 environment:
   sdk: ^3.10.1
@@ -19,6 +19,7 @@ dependencies:
   intl: ^0.20.2
   awesome_notifications: ^0.10.1
   permission_handler: ^11.1.0
+  easy_localization: ^3.0.8
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +41,7 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/translations/
 
   fonts:
     - family: Roboto

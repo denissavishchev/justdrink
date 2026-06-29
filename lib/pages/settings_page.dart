@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -31,6 +32,7 @@ class SettingsPage extends StatelessWidget {
                         Container(
                           height: size.height * 0.28,
                           width: size.width,
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           decoration: BoxDecoration(
                             color: kBlue,
                             border: Border.all(width: 0.5, color: kOrange),
@@ -44,14 +46,7 @@ class SettingsPage extends StatelessWidget {
                           ),
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text('Water is essential for your body\'s optimal function.'
-                                '\nIt regulates temperature, aids digestion, '
-                                '\nflushes out toxins, maintains skin health, '
-                                '\nand supports overall well-being. '
-                                '\nStaying hydrated improves concentration, '
-                                '\nboosts energy levels, enhances physical performance. '
-                                '\nMake water your go-to choice for a healthier, '
-                                '\nmore vibrant you.',
+                            child: Text('waterIsEssential'.tr(),
                               style: kOrangeStyle.copyWith(fontSize: 16),
                               textAlign: TextAlign.center,),
                           ),
@@ -61,10 +56,10 @@ class SettingsPage extends StatelessWidget {
                           children: [
                             BasicContainerWidget(
                               height: size.height * 0.11,
-                              width: size.width * 0.74,
+                              width: size.width * 0.8,
                               child: Row(
                                 children: [
-                                  Text('Weight: ', style: kOrangeStyle.copyWith(fontSize: 18.sp),),
+                                  Text('weight'.tr(), style: kOrangeStyle.copyWith(fontSize: 18.sp),),
                                   Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -201,10 +196,10 @@ class SettingsPage extends StatelessWidget {
                           children: [
                             BasicContainerWidget(
                               height: size.height * 0.11,
-                              width: size.width * 0.5,
+                              width: size.width * 0.55,
                               child: Row(
                                 children: [
-                                  Text('Interval (h): ',
+                                  Text('interval'.tr(),
                                     style: kOrangeStyle.copyWith(fontSize: 18.sp),),
                                   SizedBox(
                                       width: 58,
